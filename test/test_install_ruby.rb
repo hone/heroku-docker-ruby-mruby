@@ -6,6 +6,7 @@ module CLI
       InstallRuby.new(output).run(<<GEMFILE, install_path)
 ruby "2.2.2"
 GEMFILE
+      assert_include output.string, "ruby-2.2.2"
       assert Dir.exist?("#{install_path}/ruby-2.2.2")
     end
 
@@ -14,7 +15,9 @@ GEMFILE
       install_path = "/tmp/ruby-#{rand(Time.now.usec).to_s(36)}/"
       InstallRuby.new(output).run(<<GEMFILE, install_path)
 ruby "2.2.2"
+
 GEMFILE
+      assert_include output.string, "ruby-2.2.2"
       assert Dir.exist?("#{install_path}/ruby-2.2.2")
     end
   end

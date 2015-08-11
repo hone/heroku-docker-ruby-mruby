@@ -9,7 +9,15 @@ MRuby::Build.new do |conf|
   toolchain :clang
 
   conf.enable_bintest
-  #conf.enable_debug
+  conf.enable_debug
+
+  gem_config(conf)
+end
+
+MRuby::CrossBuild.new('x86_64-pc-linux-gnu') do |conf|
+  toolchain :clang
+
+  conf.build_mrbtest_lib_only
 
   gem_config(conf)
 end

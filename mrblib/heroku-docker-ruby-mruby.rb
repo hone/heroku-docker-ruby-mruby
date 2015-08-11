@@ -7,9 +7,10 @@ def __main__(argv)
     gemfile_path = argv.shift
     puts CLI::DetectRuby.new(File.read(gemfile_path)).ruby_version
   when "install-ruby"
-    gemfile_path = argv.shift
-    install_path = argv.shift
+    gemfile_path  = argv.shift
+    install_path  = argv.shift
+    profiled_path = argv.shift
 
-    CLI::InstallRuby.new($stdout).run(File.read(gemfile_path), install_path)
+    CLI::InstallRuby.new($stdout).run(File.read(gemfile_path), install_path, profiled_path)
   end
 end

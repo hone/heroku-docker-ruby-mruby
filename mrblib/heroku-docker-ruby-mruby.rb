@@ -23,6 +23,11 @@ def __main__(argv)
     profiled_path   = argv.shift
 
     CLI::InstallBundler.new($stdout).run(bundler_version, profiled_path)
+  when "bundle-install"
+    vendor_path   = argv.shift
+    profiled_path = argv.shift
+
+    CLI::BundleInstall.new($stdout).run(vendor_path, profiled_path)
   else
     $stderr.puts "#{command} not a valid command"
     exit(1)

@@ -146,3 +146,21 @@ GEMFILE_LOCK
     end
   end
 end
+
+assert('rails-env') do
+  Dir.mktmpdir do |tmp_dir|
+    Dir.chdir(tmp_dir) do
+      profiled_path = ".profile.d/ruby.sh"
+      output, status = Open3.capture2(BIN_PATH, "rails-env", profiled_path)
+      assert_true status.success?, "Process did not exit cleanly"
+
+      output, status = Open3.capture2(%Q{bash -c "source #{profiled_path} && env"})
+      assert_include output, "RAILS_ENV=production"
+      assert_include output, "SECRET_KEY_BASE"
+
+      output, status = Open3.capture2(%Q{RAILS_ENV=staging SECRET_KEY_BASE=secret bash -c "source #{profiled_path} && env"})
+      assert_include output, "RAILS_ENV=staging"
+      assert_include output, "SECRET_KEY_BASE=secret"
+    end
+  end
+end

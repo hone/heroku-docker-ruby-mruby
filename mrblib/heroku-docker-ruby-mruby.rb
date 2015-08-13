@@ -28,6 +28,10 @@ def __main__(argv)
     profiled_path = argv.shift
 
     CLI::BundleInstall.new($stdout).run(vendor_path, profiled_path)
+  when "rails-env"
+    profiled_path = argv.shift
+
+    CLI::RailsEnv.new.run(profiled_path)
   else
     $stderr.puts "#{command} not a valid command"
     exit(1)

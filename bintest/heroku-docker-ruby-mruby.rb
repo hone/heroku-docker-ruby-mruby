@@ -4,7 +4,7 @@ require 'tmpdir'
 BIN_PATH = File.join(File.dirname(__FILE__), "../mruby/bin/heroku-docker-ruby-mruby")
 
 assert('command not found') do
-  output, error, status = Open3.capture3("#{BIN_PATH}", "foo")
+  output, error, status = Open3.capture3(BIN_PATH, "foo")
   assert_equal 1, status.exitstatus
   assert_include error, "foo not a valid command"
 end
@@ -22,7 +22,7 @@ gem "rack"
 GEMFILE
       end
 
-      output, status = Open3.capture2("#{BIN_PATH}", "detect-ruby", "Gemfile")
+      output, status = Open3.capture2(BIN_PATH, "detect-ruby", "Gemfile")
 
       assert_true status.success?, "Process did not exit cleanly"
       assert_include output, "ruby-2.2.2"
@@ -45,7 +45,7 @@ GEMFILE
       install_path  = "ruby"
       profiled_path = ".profile.d/ruby.sh"
 
-      output, status = Open3.capture2("#{BIN_PATH}", "install-ruby", "Gemfile", install_path, profiled_path)
+      output, status = Open3.capture2(BIN_PATH, "install-ruby", "Gemfile", install_path, profiled_path)
 
       assert_true status.success?, "Process did not exit cleanly"
       assert_true Dir.exist?("#{install_path}/ruby-2.2.2")
@@ -61,7 +61,7 @@ assert('install-node') do
       install_path  = "ruby"
       profiled_path = ".profile.d/ruby.sh"
 
-      output, status = Open3.capture2("#{BIN_PATH}", "install-node", "0.12.7", install_path, profiled_path)
+      output, status = Open3.capture2(BIN_PATH, "install-node", "0.12.7", install_path, profiled_path)
 
       assert_true status.success?, "Process did not exit cleanly"
       assert_true Dir.exist?("#{install_path}/node-0.12.7")

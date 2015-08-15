@@ -5,7 +5,6 @@ BIN_PATH = File.join(File.dirname(__FILE__), "../mruby/bin/heroku-docker-ruby-mr
 
 assert('command not found') do
   output, error, status = Open3.capture3(BIN_PATH, "foo")
-  assert_equal 1, status.exitstatus
   assert_include error, "foo not a valid command"
 end
 

@@ -34,6 +34,5 @@ def __main__(argv)
     CLI::RailsEnv.new.run(profiled_path)
   else
     $stderr.puts "#{command} not a valid command"
-    exit(1)
   end
 end

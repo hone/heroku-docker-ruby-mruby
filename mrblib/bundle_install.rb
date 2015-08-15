@@ -6,7 +6,7 @@ module CLI
 
     def run(vendor_path, profiled_path)
       command = "bundle install --path #{vendor_path} --deployment --without development:test --jobs 4"
-      Util.pipe(command, profiled_path)
+      Util.pipe(command, @output_io, profiled_path)
     end
   end
 end

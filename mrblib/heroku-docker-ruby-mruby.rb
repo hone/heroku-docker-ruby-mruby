@@ -32,6 +32,11 @@ def __main__(argv)
     profiled_path = argv.shift
 
     CLI::RailsEnv.new.run(profiled_path)
+  when "assets-precompile"
+    rakefile_path = argv.shift
+    profiled_path = argv.shift
+
+    CLI::AssetsPrecompile.new($stdout).run(rakefile_path, profiled_path)
   else
     $stderr.puts "#{command} not a valid command"
   end

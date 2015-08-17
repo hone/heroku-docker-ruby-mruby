@@ -17,6 +17,10 @@ end
 MRuby::CrossBuild.new('x86_64-pc-linux-gnu') do |conf|
   toolchain :clang
 
+  [conf.cc, conf.cxx, conf.linker].each do |cc|
+    cc.flags << "-static"
+  end
+
   conf.build_mrbtest_lib_only
 
   gem_config(conf)

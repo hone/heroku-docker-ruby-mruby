@@ -15,7 +15,7 @@ load "#{mruby_root}/Rakefile"
 
 desc "compile binary"
 task :compile => [:mruby, :all] do
-  %W(#{MRUBY_ROOT}/build/host/bin/#{APP_NAME} #{MRUBY_ROOT}/build/i686-pc-linux-gnu/#{APP_NAME}").each do |bin|
+  %W(#{MRUBY_ROOT}/build/host/bin/#{APP_NAME} #{MRUBY_ROOT}/build/x86_64-pc-linux-gnu/#{APP_NAME}").each do |bin|
     sh "strip --strip-unneeded #{bin}" if File.exist?(bin)
   end
 end

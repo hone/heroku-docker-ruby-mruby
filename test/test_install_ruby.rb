@@ -29,6 +29,20 @@ GEMFILE
     ensure
       IO.popen("rm -rf #{install_path}")
     end
+
+    def test_default_ruby
+      output       = StringIO.new
+      install_path = "/tmp/ruby-#{rand(Time.now.usec).to_s(36)}/"
+      InstallRuby.new(output).run(<<GEMFILE, install_path)
+GEMFILE
+      assert_include output.string, "ruby-2.2.2"
+      assert Dir.exist?("#{install_path}/ruby-2.2.2")
+      assert_include File.read(profiled_path), %Q{export PATH="#{install_path}/ruby-2.2.2/bin:$PATH"}
+      assert_include File.read(profiled_path), %Q{export GEM_PATH="#{install_path}/bundle/ruby/2.2.0"}
+      assert_include File.read(profiled_path), %Q{export GEM_HOME="#{install_path}/bundle/ruby/2.2.0"}
+    ensure
+      IO.popen("rm -rf #{install_path}")
+    end
   end
 end
 

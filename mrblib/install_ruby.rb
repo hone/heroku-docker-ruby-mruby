@@ -1,18 +1,21 @@
 module CLI
   class InstallRuby
+    DEFAULT_RUBY_VERSION = "ruby-2.2.2"
+
     def initialize(output_io)
       @output_io = output_io
     end
 
     def run(gemfile, install_path, profiled_path = nil)
       ruby = DetectRuby.new(gemfile)
-      @output_io.puts "Installing Ruby Version: #{ruby.ruby_version.to_s}"
+      ruby_version = ruby.ruby_version ? ruby.ruby_version.to_s : DEFAULT_RUBY_VERSION
+      @output_io.puts "Installing Ruby Version: #{ruby_version}"
       ruby_install_path = install_path.dup
       ruby_install_path += "/" unless ruby_install_path[-1] == "/"
-      ruby_install_path += ruby.ruby_version.to_s
+      ruby_install_path += ruby_version
 
       Util.mkdir_p(ruby_install_path)
-      command = "curl -s --retry 3 -L https://heroku-buildpack-ruby.s3.amazonaws.com/cedar-14/#{ruby.ruby_version.to_s}.tgz | tar xz -C #{ruby_install_path}"
+      command = "curl -s --retry 3 -L https://heroku-buildpack-ruby.s3.amazonaws.com/cedar-14/#{ruby_version}.tgz | tar xz -C #{ruby_install_path}"
       Util.pipe(command, @output_io)
 
       write_profiled(profiled_path, install_path, ruby_install_path) if profiled_path

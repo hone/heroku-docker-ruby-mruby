@@ -1,7 +1,7 @@
 require 'open3'
 require 'tmpdir'
 
-BIN_PATH = File.join(File.dirname(__FILE__), "../mruby/bin/heroku-docker-ruby-mruby")
+BIN_PATH = File.join(File.dirname(__FILE__), "../mruby/bin/heroku-docker-ruby-util")
 
 assert('command not found') do
   output, error, status = Open3.capture3(BIN_PATH, "foo")

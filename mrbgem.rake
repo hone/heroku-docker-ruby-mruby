@@ -1,8 +1,8 @@
-MRuby::Gem::Specification.new('heroku-docker-ruby-mruby') do |spec|
+MRuby::Gem::Specification.new('heroku-docker-ruby-util') do |spec|
   spec.license = 'MIT'
   spec.author  = 'Terence'
-  spec.summary = 'heroku-docker-ruby-mruby'
-  spec.bins    = ['heroku-docker-ruby-mruby']
+  spec.summary = 'heroku-docker-ruby-util'
+  spec.bins    = ['heroku-docker-ruby-util']
 
   spec.add_dependency 'mruby-eval',        core: 'mruby-eval'
   spec.add_dependency 'mruby-array-ext',   core: 'mruby-array-ext'

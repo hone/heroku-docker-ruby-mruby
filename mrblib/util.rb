@@ -23,7 +23,7 @@ module Util
       command = %Q{bash -c "source #{profiled_path} && #{command}"} if profiled_path
 
       IO.popen(command) do |io|
-        while data = io.read(16)
+        while data = io.read(8)
           output_io.print data
         end
       end

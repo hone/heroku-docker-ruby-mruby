@@ -20,9 +20,10 @@ def __main__(argv)
     CLI::InstallNode.new($stdout).run(node_version, install_path, profiled_path)
   when "install-bundler"
     bundler_version = argv.shift
+    config_path     = argv.shift
     profiled_path   = argv.shift
 
-    CLI::InstallBundler.new($stdout).run(bundler_version, profiled_path)
+    CLI::InstallBundler.new($stdout).run(bundler_version, config_path, profiled_path)
   when "bundle-install"
     vendor_path   = argv.shift
     profiled_path = argv.shift

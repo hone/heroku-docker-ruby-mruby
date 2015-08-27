@@ -6,6 +6,10 @@ def __main__(argv)
   when "detect-ruby"
     gemfile_path = argv.shift
     puts CLI::DetectRuby.new(File.read(gemfile_path)).ruby_version
+  when "detect-gem"
+    profiled_path = argv.shift
+    gem_name      = argv.shift
+    puts CLI::DetectGem.new(profiled_path).gem(gem_name)
   when "install-ruby"
     gemfile_path  = argv.shift
     install_path  = argv.shift

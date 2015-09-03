@@ -42,6 +42,10 @@ def __main__(argv)
     profiled_path = argv.shift
 
     CLI::AssetsPrecompile.new($stdout).run(rakefile_path, profiled_path)
+  when "database-yml"
+    install_path  = argv.shift
+    profiled_path = argv.shift
+    CLI::DatabaseYml.new.run(install_path, profiled_path)
   else
     $stderr.puts "#{command} not a valid command"
   end

@@ -22,8 +22,11 @@ ONBUILD RUN ruby-util bundle-install /app/heroku/ruby/bundle /app/.profile.d/rub
 # Install Node
 ONBUILD RUN ruby-util install-node 0.12.7 /app/heroku/ruby/ /app/.profile.d/ruby.sh
 
-# run assets:precompile if the task exists
+# Create database.yml
 ONBUILD ADD . /app/user
+ONBUILD RUN ruby-util database-yml /app/user/config/ /app/.profile.d/ruby.sh
+
+# run assets:precompile if the task exists
 ONBUILD RUN ruby-util rails-env /app/.profile.d/ruby.sh
 ONBUILD RUN ruby-util assets-precompile /app/user/Rakefile /app/.profile.d/ruby.sh
 

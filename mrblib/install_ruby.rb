@@ -30,15 +30,14 @@ module CLI
 
       profiled.override("PATH", "#{ruby_install_path}/bin#{File::PATH_SEPARATOR}$PATH")
       if ruby_abi
-        profiled.override("GEM_PATH", "#{install_path}/bundle/ruby/2.2.0")
-        profiled.override("GEM_HOME", "#{install_path}/bundle/ruby/2.2.0")
+        profiled.override("GEM_PATH", "#{install_path}/bundle/ruby/#{ruby_abi}")
+        profiled.override("GEM_HOME", "#{install_path}/bundle/ruby/#{ruby_abi}")
       end
 
       File.open(profiled_path, 'a') {|file| file.puts profiled.string }
     end
 
     def parse_ruby_abi(install_path)
-      abi_regex = Regexp.compile("\d\.\d\.\d")
       abi = Dir.entries("#{install_path}/lib/ruby/").detect {|entry| /^\d\.\d\.\d$/.match(entry) }
       rbconfig_file = "#{install_path}/lib/ruby/#{abi}/x86_64-linux/rbconfig.rb"
 

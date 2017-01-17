@@ -1,6 +1,6 @@
 module CLI
   class InstallRuby
-    DEFAULT_RUBY_VERSION = "ruby-2.2.2"
+    DEFAULT_RUBY_VERSION = "ruby-2.2.6"
 
     def initialize(output_io)
       @output_io = output_io

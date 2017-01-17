@@ -14,8 +14,12 @@ module CLI
 
     def gemspec_file(name)
       gemspec_regexp = Regexp.compile("#{name}(-aix|cygwin|darwin|macruby|freebsd|hpux|java|dalvik|dotnet|linux|mingw32|netbsdelf|openbsd|bitrig|solaris|unknown)?-[0-9]+\.[0-9]+\.[0-9]\.gemspec")
-      Dir.entries(@specs_dir).entries.detect do |filename|
-        gemspec_regexp =~ filename
+      begin
+        Dir.entries(@specs_dir).entries.detect do |filename|
+          gemspec_regexp =~ filename
+        end
+      rescue Errno::ENOENT => e
+        $stderr.puts e.message
       end
     end
   end

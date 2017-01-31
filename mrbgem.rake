@@ -8,8 +8,8 @@ MRuby::Gem::Specification.new('heroku-docker-ruby-util') do |spec|
   spec.add_dependency 'mruby-array-ext',   core: 'mruby-array-ext'
   spec.add_dependency 'mruby-dir',         mgem: 'mruby-dir'
   spec.add_dependency 'mruby-env',         mgem: 'mruby-env'
+  spec.add_dependency 'mruby-onig-regexp', mgem: 'mruby-onig-regexp'
   spec.add_dependency 'mruby-stringio',    github: 'ksss/mruby-stringio'
-  spec.add_dependency 'mruby-onig-regexp', github: 'hone/mruby-onig-regexp'
   spec.add_dependency 'mruby-process',     github: 'hone/mruby-process',    branch: 'header'
   spec.add_dependency 'mruby-io',          github: 'hone/mruby-io',         branch: 'popen_status'
 
